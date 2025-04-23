@@ -15,11 +15,13 @@
     username: "{{ rhn_username }}"
     password: "{{ rhn_password }}"
     validate_certs: false
+  when: activate == true or activate is not defined
 
 - name: Attach pool
   ansible.controller.license:
     pool_id: "{{ rhn_pool_id }}"
     validate_certs: false
+  when: activate == true or activate is not defined
 
 - name: Configure Project Standard Settings
   ansible.controller.settings:
