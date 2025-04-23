@@ -4,6 +4,8 @@
     paths: "{{ controller_vars_dir }}"
   register: variable_files
 
+- debug: msg="{{ variable_files }}"
+
 - name: Include controller variables
   ansible.builtin.include_vars:
     file: "{{ item.path }}"
