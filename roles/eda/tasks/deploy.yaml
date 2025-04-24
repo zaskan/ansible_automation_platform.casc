@@ -37,6 +37,7 @@
   loop: "{{ eda_credentials }}"
   when:
     - eda_credentials is defined
+  no_log: true
 
 - name: Create User token
   ansible.eda.controller_token:
@@ -68,6 +69,7 @@
     description: "{{ item.description }}"
     url: "{{ item.url }}"
     state: present
+    sync: true
     organization_name: "{{ org | default('Default') }}"
     validate_certs: false
   loop: "{{ eda_projects }}"
@@ -75,6 +77,15 @@
   when:
     - eda_projects is defined
   until: project_status != ""
+
+- name: Delete rulebook activation
+  ansible.eda.rulebook_activation:
+    name: "{{ item.name }}"
+    state: absent
+    validate_certs: false
+  loop: "{{ activations }}"
+  when:
+    - activations is defined
 
 - name: Create Rulebook Activation
   ansible.eda.rulebook_activation:

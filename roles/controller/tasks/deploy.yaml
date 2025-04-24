@@ -4,8 +4,6 @@
     paths: "{{ controller_vars_dir }}"
   register: variable_files
 
-- debug: msg="{{ variable_files }}"
-
 - name: Include controller variables
   ansible.builtin.include_vars:
     file: "{{ item.path }}"
@@ -18,12 +16,16 @@
     password: "{{ rhn_password }}"
     validate_certs: false
   when: activate == true or activate is not defined
+  retries: 5
+  delay: 10
 
 - name: Attach pool
   ansible.controller.license:
     pool_id: "{{ rhn_pool_id }}"
     validate_certs: false
   when: activate == true or activate is not defined
+  retries: 5
+  delay: 10
 
 - name: Configure Project Standard Settings
   ansible.controller.settings:
@@ -134,6 +136,7 @@
   loop: "{{ controller_credentials }}"
   when:
     - controller_credentials is defined
+  no_log: true
 
 - name: Create Inventories
   ansible.controller.inventory:
