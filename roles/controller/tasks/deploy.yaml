@@ -15,7 +15,7 @@
     username: "{{ rhn_username }}"
     password: "{{ rhn_password }}"
     validate_certs: false
-  when: activate == true or activate is not defined
+  when: (activate is defined and activate == true) or (activate is not defined)
   retries: 5
   delay: 10
 
@@ -23,7 +23,7 @@
   ansible.controller.license:
     pool_id: "{{ rhn_pool_id }}"
     validate_certs: false
-  when: activate == true or activate is not defined
+  when: (activate is defined and activate == true) or (activate is not defined)
   retries: 5
   delay: 10
 
