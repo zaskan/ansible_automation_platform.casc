@@ -12,8 +12,8 @@
 
 - name: Fetch subscriptions from Red Hat Portal
   ansible.controller.subscriptions:
-    username: "{{ rhn_username }}"
-    password: "{{ rhn_password }}"
+    client_id: "{{ rhn_username }}"
+    client_secret: "{{ rhn_password }}"
     validate_certs: false
   when: (activate is defined and activate == true) or (activate is not defined)
   retries: 5
