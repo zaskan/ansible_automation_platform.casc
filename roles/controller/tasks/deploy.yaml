@@ -19,9 +19,9 @@
   retries: 5
   delay: 10
 
-- name: Attach pool
+- name: Attach Subscription
   ansible.controller.license:
-    pool_id: "{{ rhn_pool_id }}"
+    subscription_id: "{{ rhn_subscription_id }}"
     validate_certs: false
   when: (activate is defined and activate == true) or (activate is not defined)
   retries: 5
