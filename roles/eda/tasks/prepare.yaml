@@ -10,15 +10,3 @@
   retries: 60
   delay: 10
   register: eda
-
-- name: Set EDA Hostname Information
-  ansible.builtin.set_fact:
-    eda_host: "{{ eda.resources[0].spec.host }}"
-
-- name: Set EDA Username Information
-  ansible.builtin.set_fact:
-    eda_username: "{{ aap_username }}"
-
-- name: Set EDA Password Information
-  ansible.builtin.set_fact:
-    eda_pass: "{{ aap_password }}"
