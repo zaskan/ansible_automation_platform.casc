@@ -11,3 +11,5 @@
         CONTROLLER_USERNAME: "{{ aap_username }}"
         CONTROLLER_PASSWORD: "{{ aap_password }}"
         CONTROLLER_VERIFY_SSL: "false"
+
+- debug: msg="{{ aap_host | urlsplit('hostname') }}"
