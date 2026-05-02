@@ -22,10 +22,17 @@
 - name: Set Controller Hostname Information
   ansible.builtin.set_fact:
     aap_host: "{{ controller.resources[0].spec.host }}"
+  when: aap_host is not defined
+
+- name: Set Controller Username Information
+  ansible.builtin.set_fact:
+    aap_username: "admin"
+  when: aap_username is not defined
 
 - name: Set Controller Password Information
   ansible.builtin.set_fact:
     aap_password: "{{ aap_password.resources[0].data.password | ansible.builtin.b64decode }}"
+  when: aap_password is not defined
 
 - name: Wait for Ansible Controller API to be ready
   ansible.builtin.uri:
